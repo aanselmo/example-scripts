@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-script.dir <- system("find ~/ -name \"DiffExpRnaSeqEdgeR\" 2>/dev/null", intern=TRUE)[1]
+script.dir <- system("find ~/ -name \"diffExpRnaSeqEdgeR\" 2>/dev/null", intern=TRUE)[1]
 date <- Sys.Date()
 
 ##### SUBS/FUNCTIONS ########
