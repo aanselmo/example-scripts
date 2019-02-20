@@ -1,0 +1,1 @@
+/Users/aanselmo/Documents/project	hg19_id_genename_length_salmon.txt	groupings2.txt	comparisons.txt	GSE72509	0.05	1

@@ -1,2 +1,2 @@
 # example-scripts
-example of recent scripts to show others
+example of non-proprietary scripts to show others

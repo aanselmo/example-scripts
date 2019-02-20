@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1550689106490.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2509284603",
+    "id" : "58334592",
+    "lastKnownWriteTime" : 1550692398,
+    "last_content_update" : 1550692398694,
+    "path" : "~/OneDrive - PatientsLikeMe/Documents/R_Analysis/shiny_disease_score/app_disease_score.R",
+    "project_path" : "app_disease_score.R",
+    "properties" : {
+        "cursorPosition" : "19,27",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
