@@ -1,7 +1,9 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/Rscript
 
 script.dir <- system("find ~/ -name \"DiffExpRnaSeqEdgeR\" 2>/dev/null", intern=TRUE)[1]
 print(script.dir)
+# Preferably, put DiffExpRnaSeqEdgeR directory in a home directory!!!
+
 date <- Sys.Date()
 print(date)
 
@@ -17,7 +19,7 @@ source(paste(script.dir,"/subscripts/assemble_table.R",sep=""))
 #source("subscripts/plot_mat_heatmap.R")
 #source("subscripts/plot_dge_pairs.R")
 #source("subscripts/assemble_table.R")
-
+library(methods);
 library(edgeR);
 
 #ARGS
