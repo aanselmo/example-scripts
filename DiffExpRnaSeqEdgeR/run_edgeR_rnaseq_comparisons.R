@@ -1,7 +1,9 @@
 #!/usr/bin/env Rscript
 
 script.dir <- system("find ~/ -name \"DiffExpRnaSeqEdgeR\" 2>/dev/null", intern=TRUE)[1]
+print(script.dir)
 date <- Sys.Date()
+print(date)
 
 ##### SUBS/FUNCTIONS ########
 source(paste(script.dir,"/subscripts/get_args.R",sep=""))
@@ -193,7 +195,7 @@ compname <- paste(comparisons$group2[i],"_vs_",comparisons$group1[i], sep="")
 
 #############_PRINT  MA_plots_###################################
 
-pdf(paste(outputdir,"/MA_plot_", compname, "_fdr_",fdr_cutoff,".pdf", sep=""));
+pdf(paste(outputdir,"/MA_plot_", compname, "_fdr_",fdr_cutoff[i],".pdf", sep=""));
 plot(etp$table$logCPM,etp$table$logFC, 
        xlab="Log2 CPM avg", 
        ylab=paste("Log2 FC: ",comparisons$group2[i],"/",comparisons$group1[i], sep=""), 
@@ -201,10 +203,10 @@ plot(etp$table$logCPM,etp$table$logFC,
        xlim=c(-3, 20), 
        ylim=c(-10, 10),
        pch=20, 
-       cex=ifelse(etp$table$FDR < fdr_cutoff, 0.5, 0.3 ),
-       col=ifelse(etp$table$FDR < fdr_cutoff & etp$table$logFC > 1 ,"red", 
-                  ifelse(etp$table$FDR < fdr_cutoff & etp$table$logFC < (-1), "green",
-                         ifelse(etp$table$FDR > fdr_cutoff,"black","black"))))
+       cex=ifelse(etp$table$FDR < fdr_cutoff[i], 0.5, 0.3 ),
+       col=ifelse(etp$table$FDR < fdr_cutoff[i] & etp$table$logFC > 1 ,"red", 
+                  ifelse(etp$table$FDR < fdr_cutoff[i] & etp$table$logFC < (-1), "green",
+                         ifelse(etp$table$FDR > fdr_cutoff[i],"black","black"))))
 dev.off()
 
 ############ SELECT UP and DOWN Genes : Log2FC >1 or <-1 ###########
@@ -214,21 +216,21 @@ ID <- row.names(logFC_fdr_table)
 logFC_fdr_table <- cbind(ID,logFC_fdr_table)
 
 
-UP_genes_table <- logFC_fdr_table[logFC_fdr_table$FDR <= fdr_cutoff & logFC_fdr_table$logFC >= log_cutoff,]
-DOWN_genes_table <- logFC_fdr_table[logFC_fdr_table$FDR <= fdr_cutoff & logFC_fdr_table$logFC <= (-1)*log_cutoff,]
+UP_genes_table <- logFC_fdr_table[logFC_fdr_table$FDR <= fdr_cutoff[i] & logFC_fdr_table$logFC >= log_cutoff[i],]
+DOWN_genes_table <- logFC_fdr_table[logFC_fdr_table$FDR <= fdr_cutoff[i] & logFC_fdr_table$logFC <= (-1)*log_cutoff[i],]
 
 #### WRITE TABLES ########
 write.table(logFC_fdr_table,
-            file=paste(outputdir,"/",compname, "_fdr_", fdr_cutoff, "_log2cutoff_",log_cutoff, "_expressed_genes_log2FC_table.txt", sep=""), 
+            file=paste(outputdir,"/",compname, "_fdr_", fdr_cutoff[i], "_log2cutoff_",log_cutoff[i], "_expressed_genes_log2FC_table.txt", sep=""), 
             sep="\t", quote=FALSE, row.names=FALSE);
 
 write.table(UP_genes_table[order(UP_genes_table$logFC,decreasing=TRUE),],
-            file=paste(outputdir,"/",compname, "_fdr_", fdr_cutoff, "_log2cutoff_",log_cutoff, "_UP_genes_table.txt", sep=""), 
+            file=paste(outputdir,"/",compname, "_fdr_", fdr_cutoff[i], "_log2cutoff_",log_cutoff[i], "_UP_genes_table.txt", sep=""), 
             sep="\t", quote=FALSE, row.names=FALSE)
               
   
 write.table(DOWN_genes_table[order(DOWN_genes_table$logFC,decreasing=FALSE),],
-              file=paste(outputdir,"/",compname, "_fdr_", fdr_cutoff, "_log2cutoff_",log_cutoff, "_DOWN_genes_table.txt", sep=""), 
+              file=paste(outputdir,"/",compname, "_fdr_", fdr_cutoff[i], "_log2cutoff_",log_cutoff[i], "_DOWN_genes_table.txt", sep=""), 
             sep="\t", quote=FALSE, row.names=FALSE)
 
 }
